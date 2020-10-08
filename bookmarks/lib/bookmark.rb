@@ -1,18 +1,17 @@
 require "pg"
 
 class Bookmark
-  # def self.all
-  #   [
-  #     "http://www.bbc.co.uk",
-  #     "http://www.google.com"
-  #   ]
-  # end
-
   def self.all
-    conn = PG.connect( dbname: 'bookmark_manager' )
-    rs = conn.exec "SELECT * FROM bookmarks"
-    #
-    # rs.map do |row|
-    #   row["url"]
+
+    begin
+      con = PG.connect :dbname => 'bookmark_manager', :user => 'student'
+      rs = con.exec "SELECT * FROM bookmarks"
+      results = []
+      rs.each do |row|
+         results << {id: row["id"],  url: row["url"]}
+      end
     end
+    # p "in the bookmark model: #{results}"
+    results
   end
+end
