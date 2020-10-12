@@ -1,16 +1,12 @@
-feature 'view bookmarks from psql database' do
-  scenario 'retrieves bookmarks' do
-    visit '/bookmarks'
-    expect(page).to have_content "http://www.makersacademy.com"
-    expect(page).to have_content "http://www.askjeeves.com"
-    expect(page).to have_content "http://www.twitter.com"
-    expect(page).to have_content "http://www.google.com"
-  end
-end
-
-
-
-
+# feature 'view bookmarks from psql database' do
+#   scenario 'retrieves bookmarks' do
+#     visit '/bookmarks'
+#     expect(page).to have_content "http://www.makersacademy.com"
+#     expect(page).to have_content "http://www.askjeeves.com"
+#     expect(page).to have_content "http://www.twitter.com"
+#     expect(page).to have_content "http://www.google.com"
+#   end
+# end
 
 
 
@@ -22,9 +18,9 @@ feature 'Viewing bookmarks' do
     connection = PG.connect(dbname: 'bookmark_manager_test')
 
     # Add the test data
-    connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(2, 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks VALUES(3, 'http://www.google.com');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES ('http://www.makersacademy.com');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.destroyallsoftware.com');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('http://www.google.com');")
 
     visit('/bookmarks')
 
